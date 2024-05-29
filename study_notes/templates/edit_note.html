@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if note %}Edit{% else %}Add{% endif %} Note</title>
+</head>
+<body>
+    <h1>{% if note %}Edit{% else %}Add{% endif %} Note</h1>
+    <form method="POST">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="{{ note.title if note else '' }}" required>
+        <br>
+        <label for="content">Content</label>
+        <textarea id="content" name="content" required>{{ note.content if note else '' }}</textarea>
+        <br>
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="Cloud Certification" {% if note and note.category == 'Cloud Certification' %}selected{% endif %}>Cloud Certification</option>
+            <option value="OSCP Prep" {% if note and note.category == 'OSCP Prep' %}selected{% endif %}>OSCP Prep</option>
+            <option value="Finnish" {% if note and note.category == 'Finnish' %}selected{% endif %}>Finnish</option>
+            <option value="Italian" {% if note and note.category == 'Italian' %}selected{% endif %}>Italian</option>
+            <option value="Swedish" {% if note and note.category == 'Swedish' %}selected{% endif %}>Swedish</option>
+        </select>
+        <br>
+        <button type="submit">{% if note %}Update{% else %}Add{% endif %}</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>
+
